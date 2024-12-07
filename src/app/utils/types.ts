@@ -8,3 +8,9 @@ export interface Player {
   volume: number;
   image: string;
 }
+
+export type leaderboardEntry = {
+  username: string;
+  rank: number;
+  score: number;
+};

@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model AnonAadhaar {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  anonAadhaarId String
+  createdAt     DateTime @default(now()) @db.Date
+  updatedAt     DateTime @updatedAt @db.Date
+  username      String
+}
+
+model githubReviews {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  blobId       String
+  createdAt    DateTime @default(now()) @db.Date
+  link         String
+  organisation String?
+  review       String
+  score        Int
+  username     String
+  updatedAt    DateTime @updatedAt @db.Date
+}

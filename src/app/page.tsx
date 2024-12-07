@@ -1,6 +1,8 @@
+// import BentoDemo from "@/components/landing-page/features";
 import Features from "@/components/landing-page/features";
 import HeroSection from "@/components/landing-page/hero-section";
 import Working from "@/components/landing-page/how-it-works";
+
 
 export default function Home() {
   return (
@@ -8,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <Working />
       <Features />
+      
     </div>
   );
 }
