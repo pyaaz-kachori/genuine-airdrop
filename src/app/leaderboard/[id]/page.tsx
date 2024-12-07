@@ -1,8 +1,47 @@
 import Image from "next/image";
-import { players } from "../utils/dummyData";
+import { players } from "../../utils/dummyData";
 import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-const Leaderboard = async () => {
+const Leaderboard = async ({
+  params: { id: userId },
+}: {
+  params: { id: string };
+}) => {
+  const [isLoading,setIsLoading] = useState(false)
+  const [details,setDetails] = useState<[]|null>(null)
+  const router = useRouter()
+  const fetchDetails = useCallback(async () => {
+    try {
+      console.log('dhjdshcbjh')
+      setIsLoading(true);
+      const response = await axios.get('');
+      if (response.data.details) {
+        setDetails(response.data.details)
+      }
+    } catch (error) {
+      console.error('Error fetching details:', error);
+      setIsLoading(false);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    const pollingInterval = setInterval(() => {
+      if (!details) {
+        fetchDetails();
+      } else {
+        clearInterval(pollingInterval);
+      }
+    }, 150000);
+
+    return () => {
+      clearInterval(pollingInterval);
+    };
+  }, [fetchDetails, details]);
+
+  
   return (
     <div className="min-h-screen bg-black text-white p-8">
       <h1 className="text-center text-[#4ade80] text-4xl mb-2">LEADERBOARD</h1>

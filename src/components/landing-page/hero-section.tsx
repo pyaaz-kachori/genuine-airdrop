@@ -1,8 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import HyperText from "../ui/hyper-text";
+import { AnimatedModalDemo } from "./reg-org-modal";
 
 const HeroSection = () => {
+
+  const [isModalOpen,setIsModelOpen] = useState<boolean>(false)
+
   return (
     <div className="h-screen font-sans relative flex items-center justify-center text-primary-text">
       <video
@@ -26,11 +31,9 @@ const HeroSection = () => {
           Leverage GitHub insights to create fair and impactful token
           distributions for genuine contributors.
         </p>
-        <div className="space-x-4">
-          <button className="px-6 py-3 hover:bg-primary-text hover:text-primary-bg font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500">
-            Register Your Organization
-          </button>
-          <button className="px-6 py-3 hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500">
+        <div className=" ">
+        <AnimatedModalDemo />
+          <button className="px-6 py-3 display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500">
             Learn More
           </button>
         </div>
@@ -42,6 +45,7 @@ const HeroSection = () => {
           <span className="font-bold">500+</span> Projects Rewarded
         </p>
       </div>
+      
     </div>
   );
 };
