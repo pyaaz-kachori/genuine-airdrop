@@ -15,36 +15,29 @@ const Leaderboard = ({
   params: { id: string };
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [details, setDetails] = useState<[] | null>(null);
+  const [leaderboardEntries, setLeaderboardEntries] = useState<
+    leaderboardEntry[]
+  >(dummyLeaderboardEntries);
   const router = useRouter();
+
   const fetchDetails = useCallback(async () => {
     try {
-      console.log("dhjdshcbjh");
       setIsLoading(true);
-      const response = await axios.get("");
-      if (response.data.details) {
-        setDetails(response.data.details); //! ab details agar aa gyi to aage kya karna hai
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/leaderboard/${orgname}`
+      );
+      if (response.data) {
+        setLeaderboardEntries(response.data);
       }
     } catch (error) {
       console.error("Error fetching details:", error);
+    } finally {
       setIsLoading(false);
     }
   }, [orgname]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (isPolling) {
-        fetchDetails();
-      }
-    }, 5000); // Poll every 5 seconds
-
-    return () => {
-      clearInterval(intervalId); // Cleanup on unmount or polling stop
-    };
-  }, [fetchDetails, isPolling]);
-
-  useEffect(() => {
-    fetchDetails(); // Initial fetch when the component mounts
+    fetchDetails();
   }, [fetchDetails]);
 
   const topThreePlayers = leaderboardEntries.slice(0, 3);
@@ -89,11 +82,11 @@ const Leaderboard = ({
       <div className="absolute top-5 right-5">
         <AnonAadhaarProvider
           _useTestAadhaar={true}
-          // _artifactslinks={{
-          //   zkey_url: "/circuit_final.zkey",
-          //   vkey_url: "/vkey.json",
-          //   wasm_url: "/aadhaar-verifier.wasm",
-          // }}
+          _artifactslinks={{
+            zkey_url: "/circuit_final.zkey",
+            vkey_url: "/vkey.json",
+            wasm_url: "/aadhaar-verifier.wasm",
+          }}
         >
           <AnonAadharModal />
         </AnonAadhaarProvider>
