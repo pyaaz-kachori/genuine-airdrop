@@ -6,6 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { ChevronRight } from "lucide-react";
+ 
+import { cn } from "@/lib/utils";
+import AnimatedGradientText from "../components/ui/animated-gradient-text";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 
@@ -15,7 +19,7 @@ const ContributionView = (props: { id: string }) => {
   //}
 
   return (
-    <div className="flex h-full w-full min-w-0 flex-row justify-between">
+    <div className="flex h-screen w-screen min-w-0 flex-row justify-end">
       <div className="flex justify-center fixed left-0 top-5  items-center p-4">
       <Card className="w-full max-w-sm shadow-lg hover:shadow-xl transition-shadow duration-300 ">
         <CardHeader className="flex flex-col items-center space-y-4 pb-6">
@@ -30,7 +34,7 @@ const ContributionView = (props: { id: string }) => {
             </AvatarFallback>
           </Avatar>
           <div className="text-center">
-            <CardTitle className="text-2 font-bold text-white mb-2">
+            <CardTitle className="text-3xl font-bold text-white mb-2">
               Satoshi Nakamoto
             </CardTitle>
             <CardDescription className="text-sm text-gray-500">
@@ -44,11 +48,23 @@ const ContributionView = (props: { id: string }) => {
           </p>
         </CardContent>
         <CardFooter className="flex justify-center pt-4 pb-6">
-          <div className="text-sm text-gray-600">
-            Contributions: 127
-          </div>
+        <AnimatedGradientText>
+        <span
+          className={cn(
+            `inline animate-gradient bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent`,
+          )}
+        >
+          Kachori Lover : Verified
+        </span>
+        
+      </AnimatedGradientText>
         </CardFooter>
       </Card>
+    </div>
+    <hr className="mx-2  my-5 h-5/6 bg-white w-px shrink-0 " />
+    <div className="flex flex-col justify-start items-center p-4">
+      <div className="flex w-full flex-row justify-start">Attested Pull Requests</div>
+      <div></div>
     </div>
     </div>
   );

@@ -19,7 +19,7 @@ const Leaderboard = async ({
       setIsLoading(true);
       const response = await axios.get('');
       if (response.data.details) {
-        setDetails(response.data.details)
+        setDetails(response.data.details) //! ab details agar aa gyi to aage kya karna hai
       }
     } catch (error) {
       console.error('Error fetching details:', error);
