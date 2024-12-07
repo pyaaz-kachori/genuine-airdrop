@@ -7,7 +7,6 @@ const ContributionModal = ({
 }) => {
   return (
     <Modal>
-      <div className="w-full h-full ">{userId}</div>
       <ContributionView id={userId} />
     </Modal>
   );
