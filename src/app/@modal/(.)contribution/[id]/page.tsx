@@ -1,3 +1,4 @@
+import ContributionView from "@/components/full-contribution-page";
 import { Modal } from "./modal";
 const ContributionModal = ({
   params: { id: userId },
@@ -6,11 +7,8 @@ const ContributionModal = ({
 }) => {
   return (
     <Modal>
-      <div className="w-full h-full ">
-        {userId}
-        {userId}
-      </div>
-      {/* <FullPageImageView id={idAsNumber}/> */}
+      <div className="w-full h-full ">{userId}</div>
+      <ContributionView id={userId} />
     </Modal>
   );
 };
