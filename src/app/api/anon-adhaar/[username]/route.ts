@@ -25,8 +25,8 @@ export async function GET(
 
     if (!anonAadhaar) {
       return NextResponse.json(
-        { error: "AnonAadhaar mapping not found" },
-        { status: 404 }
+        { message: "AnonAadhaar mapping not found" },
+        { status: 200 }
       );
     }
 

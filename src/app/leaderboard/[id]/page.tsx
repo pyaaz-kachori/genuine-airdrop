@@ -21,6 +21,7 @@ const Leaderboard = ({
   const router = useRouter();
 
   const fetchDetails = useCallback(async () => {
+    console.log("Fetching details");
     try {
       setIsLoading(true);
       const response = await axios.get(
