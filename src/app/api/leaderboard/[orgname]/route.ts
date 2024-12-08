@@ -17,7 +17,7 @@ export async function GET(
     }
 
     const getOrgLeaderboard = async (orgName: string) => {
-      const leaderboard = await prisma.githubReviews.groupBy({
+      const leaderboard = await prisma.githubReviews1.groupBy({
         by: ["username"],
         where: {
           link: {

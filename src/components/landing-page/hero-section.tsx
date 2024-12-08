@@ -5,8 +5,7 @@ import HyperText from "../ui/hyper-text";
 import { AnimatedModalDemo } from "./reg-org-modal";
 
 const HeroSection = () => {
-
-  const [isModalOpen,setIsModelOpen] = useState<boolean>(false)
+  const [isModalOpen, setIsModelOpen] = useState<boolean>(false);
 
   return (
     <div className="h-screen font-sans relative flex items-center justify-center text-primary-text">
@@ -17,7 +16,10 @@ const HeroSection = () => {
         playsInline
         className="absolute top-0 left-0 -z-20 w-full h-full object-cover"
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
+        <source
+          src="https://aggregator.walrus-testnet.walrus.space/v1/oJmlIPZIStN_ge93yrku5Gi8gki6StSoa4O7UwGnq5I"
+          type="video/mp4"
+        />
         Your browser does not support the video tag.
       </video>
 
@@ -32,7 +34,7 @@ const HeroSection = () => {
           distributions for genuine contributors.
         </p>
         <div className=" ">
-        <AnimatedModalDemo />
+          <AnimatedModalDemo />
           <button className="px-6 py-3 display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500">
             Learn More
           </button>
@@ -45,7 +47,6 @@ const HeroSection = () => {
           <span className="font-bold">500+</span> Projects Rewarded
         </p>
       </div>
-      
     </div>
   );
 };

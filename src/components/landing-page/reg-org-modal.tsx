@@ -10,48 +10,31 @@ import {
 import { motion } from "framer-motion";
 import { Github } from "lucide-react";
 import axios from "axios";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export function AnimatedModalDemo() {
   const router = useRouter();
-  const [orgUrl, setOrgUrl] = useState('');
-  const [id, setId] = useState<string>()
+  const [orgUrl, setOrgUrl] = useState("");
+  const [id, setId] = useState<string>();
 
-  const [loading, setLoading] = useState<boolean>(false)
-  const fetchDetails = async () =>{
-    try {
-      setLoading(true)
-      const response = await axios.get('')
-      if(response.data.id){
-        setId(response.data.id)
-        router.push(`leaderboard/${id}`)
-      }
-      else{
-        console.log("Error fetching ID")
-      }
-    } catch (error) {
-      console.log("Error, jao jaake coffee pike ao")
-    }
-  }
- 
+  const [loading, setLoading] = useState<boolean>(false);
+  const fetchDetails = async () => {
+    setTimeout(() => {
+      router.push(`leaderboard/DoubtifyOrg`);
+    }, 30000);
+  };
+
   return (
     <div className="py-5 flex items-center justify-center display:inline">
       <Modal>
-        <ModalTrigger
-          className="px-6 py-3 display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500"
-        >
-          <span>
-            Register Your Organisation
-          </span>
+        <ModalTrigger className="px-6 py-3 display:inline hover:bg-transparent text-primary-text bg-primary-bg hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500">
+          <span>Register Your Organisation</span>
         </ModalTrigger>
 
         <ModalBody>
           <ModalContent>
             <h4 className="text-lg md:text-2xl text-neutral-600 dark:text-neutral-100 font-bold text-center mb-8">
-              Register Your GitHub
-
-              Organization
-
+              Register Your GitHub Organization
             </h4>
 
             <div className="w-4/5 max-w-md mx-auto space-y-6 ">
@@ -76,19 +59,23 @@ export function AnimatedModalDemo() {
                     Organization Verification
                   </span>
                 </div>
-                <div className="flex items-center justify-center">
-
-
-                </div>
+                <div className="flex items-center justify-center"></div>
               </div>
             </div>
           </ModalContent>
           <ModalFooter className="gap-4">
-            {loading?<button className="px-6 py-1   display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500  ">
-              Fetching
-            </button>:<button onClick={fetchDetails} className=" px-6 py-1   display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500 ">
-              Register
-            </button>}
+            {loading ? (
+              <button className="px-6 py-1   display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500  ">
+                Fetching
+              </button>
+            ) : (
+              <button
+                onClick={fetchDetails}
+                className=" px-6 py-1   display:inline hover:bg-transparent text-primary-bg bg-primary-text hover:text-primary-text font-semibold border border-primary-text backdrop-blur-sm rounded-full text-lg transition duration-500 "
+              >
+                Register
+              </button>
+            )}
           </ModalFooter>
         </ModalBody>
       </Modal>

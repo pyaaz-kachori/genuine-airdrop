@@ -44,7 +44,7 @@ export function AnonAadharModal() {
         `${process.env.NEXT_PUBLIC_API_URL}/api/anon-adhaar/${githubUsername}`
       );
 
-      if (!response.data.anonAdhaarId) {
+      if (!response.data.anonAadhaarId) {
         // No verification found, proceed to proof generation
         setCurrentStep(2);
       } else {

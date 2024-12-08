@@ -10,19 +10,29 @@ datasource db {
 model AnonAadhaar {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   anonAadhaarId String
-  createdAt     DateTime @default(now()) @db.Date
-  updatedAt     DateTime @updatedAt @db.Date
+  createdAt     DateTime @db.Date
+  updatedAt     DateTime @db.Date
   username      String
 }
 
 model githubReviews {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
   blobId       String
-  createdAt    DateTime @default(now()) @db.Date
+  createdAt    DateTime @db.Date
   link         String
   organisation String?
   review       String
   score        Int
   username     String
-  updatedAt    DateTime @updatedAt @db.Date
+}
+
+model githubReviews1 {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  blobId       String
+  createdAt    DateTime @db.Date
+  link         String
+  organisation String
+  review       String
+  score        Int
+  username     String
 }
