@@ -1,13 +1,13 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { leaderboardEntry } from "@/app/utils/types";
 import { dummyLeaderboardEntries } from "../../utils/dummyData";
 import { AnonAadharModal } from "@/components/leaderboard/anon-aadhar";
 import { AnonAadhaarProvider } from "@anon-aadhaar/react";
-import { Trophy, Medal, ArrowUpRight } from "lucide-react";
+import { Trophy, Medal } from "lucide-react";
 
 const Leaderboard = ({
   params: { id: orgname },
@@ -18,7 +18,6 @@ const Leaderboard = ({
   const [leaderboardEntries, setLeaderboardEntries] = useState<
     leaderboardEntry[]
   >(dummyLeaderboardEntries);
-  const router = useRouter();
 
   const fetchDetails = useCallback(async () => {
     console.log("Fetching details");
@@ -79,7 +78,7 @@ const Leaderboard = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white p-8 relative">
+    <div className="min-h-screen bg-black text-white p-8 relative">
       <div className="absolute top-5 right-5">
         <AnonAadhaarProvider
           _useTestAadhaar={true}
@@ -110,7 +109,7 @@ const Leaderboard = ({
         <motion.div
           variants={playerCardVariants}
           whileHover="hover"
-          className="text-center w-64 bg-gray-800/50 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 transform -translate-y-8"
+          className="text-center w-64 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 transform -translate-y-8"
         >
           <div className="bg-gray-700/30 p-4 flex justify-between items-center">
             <Medal className="text-gray-400" />
@@ -130,7 +129,7 @@ const Leaderboard = ({
         <motion.div
           variants={playerCardVariants}
           whileHover="hover"
-          className="text-center w-72 bg-gradient-to-br from-green-600/50 to-green-900/50 rounded-2xl overflow-hidden shadow-2xl border border-green-700 scale-110"
+          className="text-center w-72 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 scale-110"
         >
           <div className="bg-green-700/30 p-4 flex justify-between items-center">
             <Trophy className="text-[#4ade80]" />
@@ -150,7 +149,7 @@ const Leaderboard = ({
         <motion.div
           variants={playerCardVariants}
           whileHover="hover"
-          className="text-center w-64 bg-gray-800/50 rounded-2xl overflow-hidden shadow-2xl border border-gray-700 transform -translate-y-4"
+          className="text-center w-64 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 transform -translate-y-4"
         >
           <div className="bg-gray-700/30 p-4 flex justify-between items-center">
             <Medal className="text-gray-400" />
@@ -167,55 +166,46 @@ const Leaderboard = ({
         </motion.div>
       </motion.div>
 
-      {/* Leaderboard Table */}
+      {/* Updated Leaderboard Table */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="overflow-x-auto"
+        className="max-w-7xl mx-auto"
       >
-        <table className="w-full text-left bg-gray-800/30 backdrop-blur-sm rounded-2xl overflow-hidden">
-          <thead className="bg-gray-700/30 text-gray-400">
-            <tr>
-              <th className="py-6 px-8 text-lg">RANK</th>
-              <th className="py-6 px-8 text-lg">USERNAME</th>
-              <th className="py-6 px-8 text-lg">SCORE</th>
-              <th className="py-6 px-8 text-lg">ACTION</th>
+        <table className="w-full text-left">
+          <thead>
+            <tr className="text-gray-400 border-b border-gray-800">
+              <th className="py-4 px-6 text-sm font-medium">Pool</th>
+              <th className="py-4 px-6 text-sm font-medium">Username</th>
+              <th className="py-4 px-6 text-sm font-medium text-right">
+                Score
+              </th>
             </tr>
           </thead>
           <tbody>
-            <AnimatePresence>
-              {remainingPlayers.map((entry, index) => (
-                <motion.tr
-                  key={entry.rank}
-                  variants={rowVariants}
-                  initial="hidden"
-                  animate="visible"
-                  custom={index}
-                  exit="hidden"
-                  className="border-b border-gray-700 hover:bg-gray-700/30 transition-all duration-300"
-                >
-                  <td className="py-5 px-8 text-lg font-medium">
-                    [{entry.rank}]
-                  </td>
-                  <td className="py-5 px-8 text-lg font-semibold">
-                    {entry.username}
-                  </td>
-                  <td className="py-5 px-8 text-blue-400 text-xl font-bold">
-                    {entry.score}
-                  </td>
-                  <td className="py-5 px-8">
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="bg-blue-600/30 text-blue-400 p-2 rounded-full hover:bg-blue-600/50 transition-all"
-                    >
-                      <ArrowUpRight />
-                    </motion.button>
-                  </td>
-                </motion.tr>
-              ))}
-            </AnimatePresence>
+            {remainingPlayers.map((entry, index) => (
+              <motion.tr
+                key={entry.rank}
+                variants={rowVariants}
+                initial="hidden"
+                animate="visible"
+                custom={index}
+                exit="hidden"
+                className="hover:bg-[#1a1a1a] transition-colors duration-200"
+              >
+                <td className="py-4 px-6">
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-300">#{entry.rank}</span>
+                    <span className="font-medium">{entry.username}</span>
+                  </div>
+                </td>
+                <td className="py-4 px-6 text-gray-400">{entry.username}</td>
+                <td className="py-4 px-6 text-right font-medium text-blue-400">
+                  {entry.score}
+                </td>
+              </motion.tr>
+            ))}
           </tbody>
         </table>
       </motion.div>
