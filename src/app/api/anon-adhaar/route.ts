@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
       data: {
         username,
         anonAadhaarId,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     });
 

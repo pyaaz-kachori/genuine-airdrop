@@ -18,11 +18,22 @@ model AnonAadhaar {
 model githubReviews {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   blobId       String
-  createdAt    DateTime @default(now()) @db.Date
+  createdAt    DateTime @db.Date
   link         String
   organisation String?
   review       String
+  /// Multiple data types found: Int: 11.1%, BigInt: 88.9% out of 27 sampled entries
+  score        Json
+  username     String
+}
+
+model githubReviews1 {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  blobId       String
+  createdAt    DateTime @db.Date
+  link         String
+  organisation String
+  review       String
   score        Int
   username     String
-  updatedAt    DateTime @updatedAt @db.Date
 }

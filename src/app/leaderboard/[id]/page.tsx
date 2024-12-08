@@ -8,6 +8,7 @@ import { dummyLeaderboardEntries } from "../../utils/dummyData";
 import { AnonAadharModal } from "@/components/leaderboard/anon-aadhar";
 import { AnonAadhaarProvider } from "@anon-aadhaar/react";
 import { Trophy, Medal } from "lucide-react";
+import Link from "next/link";
 
 const Leaderboard = ({
   params: { id: orgname },
@@ -82,11 +83,11 @@ const Leaderboard = ({
       <div className="absolute top-5 right-5">
         <AnonAadhaarProvider
           _useTestAadhaar={true}
-          _artifactslinks={{
-            zkey_url: "/circuit_final.zkey",
-            vkey_url: "/vkey.json",
-            wasm_url: "/aadhaar-verifier.wasm",
-          }}
+          // _artifactslinks={{
+          //   zkey_url: "/circuit_final.zkey",
+          //   vkey_url: "/vkey.json",
+          //   wasm_url: "/aadhaar-verifier.wasm",
+          // }}
         >
           <AnonAadharModal />
         </AnonAadhaarProvider>
@@ -99,71 +100,79 @@ const Leaderboard = ({
         Top performers ranked by score
       </p>
 
-      {/* Top 3 Players Podium */}
       <motion.div
         initial="hidden"
         animate="visible"
-        className="flex justify-center items-end gap-8 mb-16"
+        className="flex justify-center items-end gap-4 mb-24 h-[400px]"
       >
         {/* Second Place */}
-        <motion.div
-          variants={playerCardVariants}
-          whileHover="hover"
-          className="text-center w-64 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 transform -translate-y-8"
-        >
-          <div className="bg-gray-700/30 p-4 flex justify-between items-center">
-            <Medal className="text-gray-400" />
-            <span className="text-2xl font-bold text-gray-400">[2]</span>
-          </div>
-          <div className="p-6">
-            <p className="text-xl font-semibold text-gray-300 mb-2">
-              {topThreePlayers[1]?.username || "N/A"}
-            </p>
-            <p className="text-blue-400 text-2xl font-bold">
-              {topThreePlayers[1]?.score || 0}
-            </p>
-          </div>
-        </motion.div>
+        <Link href={`/contribution/${topThreePlayers[1]?.username}`}>
+          <motion.div
+            custom={1}
+            variants={playerCardVariants}
+            whileHover="hover"
+            className="text-center w-64 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 h-64 relative top-20"
+          >
+            <div className="bg-gray-700/30 p-4 flex justify-between items-center">
+              <Medal className="text-silver h-8 w-8" />
+              <span className="text-3xl font-bold text-silver">2</span>
+            </div>
+            <div className="p-6 flex flex-col justify-center h-[calc(100%-76px)]">
+              <p className="text-xl font-semibold text-gray-300 mb-4">
+                {topThreePlayers[1]?.username || "N/A"}
+              </p>
+              <p className="text-blue-400 text-2xl font-bold">
+                {topThreePlayers[1]?.score || 0}
+              </p>
+            </div>
+          </motion.div>
+        </Link>
 
         {/* First Place */}
-        <motion.div
-          variants={playerCardVariants}
-          whileHover="hover"
-          className="text-center w-72 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 scale-110"
-        >
-          <div className="bg-green-700/30 p-4 flex justify-between items-center">
-            <Trophy className="text-[#4ade80]" />
-            <span className="text-2xl font-bold text-[#4ade80]">[1]</span>
-          </div>
-          <div className="p-6">
-            <p className="text-2xl font-bold text-[#4ade80] mb-2">
-              {topThreePlayers[0]?.username || "N/A"}
-            </p>
-            <p className="text-blue-300 text-3xl font-extrabold">
-              {topThreePlayers[0]?.score || 0}
-            </p>
-          </div>
-        </motion.div>
+        <Link href={`/contribution/${topThreePlayers[0]?.username}`}>
+          <motion.div
+            custom={0}
+            variants={playerCardVariants}
+            whileHover="hover"
+            className="text-center w-72 h-72 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800"
+          >
+            <div className="bg-green-700/30 p-4 flex justify-between items-center">
+              <Trophy className="text-[#FFD700] h-10 w-10" />
+              <span className="text-4xl font-bold text-[#FFD700]">1</span>
+            </div>
+            <div className="p-6 flex flex-col justify-center h-[calc(100%-84px)]">
+              <p className="text-2xl font-bold text-[#4ade80] mb-4">
+                {topThreePlayers[0]?.username || "N/A"}
+              </p>
+              <p className="text-blue-300 text-3xl font-extrabold">
+                {topThreePlayers[0]?.score || 0}
+              </p>
+            </div>
+          </motion.div>
+        </Link>
 
         {/* Third Place */}
-        <motion.div
-          variants={playerCardVariants}
-          whileHover="hover"
-          className="text-center w-64 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800 transform -translate-y-4"
-        >
-          <div className="bg-gray-700/30 p-4 flex justify-between items-center">
-            <Medal className="text-gray-400" />
-            <span className="text-2xl font-bold text-gray-400">[3]</span>
-          </div>
-          <div className="p-6">
-            <p className="text-xl font-semibold text-gray-300 mb-2">
-              {topThreePlayers[2]?.username || "N/A"}
-            </p>
-            <p className="text-blue-400 text-2xl font-bold">
-              {topThreePlayers[2]?.score || 0}
-            </p>
-          </div>
-        </motion.div>
+        <Link href={`/contribution/${topThreePlayers[2]?.username}`}>
+          <motion.div
+            custom={2}
+            variants={playerCardVariants}
+            whileHover="hover"
+            className="text-center w-64 h-64 bg-[#1a1a1a] rounded-xl overflow-hidden shadow-xl border border-gray-800  relative top-20"
+          >
+            <div className="bg-gray-700/30 p-4 flex justify-between items-center">
+              <Medal className="text-bronze h-8 w-8" />
+              <span className="text-3xl font-bold text-bronze">3</span>
+            </div>
+            <div className="p-6 flex flex-col justify-center h-[calc(100%-76px)]">
+              <p className="text-xl font-semibold text-gray-300 mb-4">
+                {topThreePlayers[2]?.username || "N/A"}
+              </p>
+              <p className="text-blue-400 text-2xl font-bold">
+                {topThreePlayers[2]?.score || 0}
+              </p>
+            </div>
+          </motion.div>
+        </Link>
       </motion.div>
 
       {/* Updated Leaderboard Table */}
